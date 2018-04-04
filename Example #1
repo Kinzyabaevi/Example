@@ -1,0 +1,51 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int counter = 1;
+    char symb1, symb2;
+    if (!(cin >> symb1)) {
+        return 0;
+    }
+    symb2 = symb1;
+    while (cin >> noskipws >> symb2) {
+        if (symb1 == symb2) {
+            counter++;
+        } else {
+            if (symb1 == '#') {
+                cout <<"##" << hex << counter << '#';
+                counter = 1;
+                symb1 = symb2;
+                continue;
+            }
+
+            if (counter > 4) {
+                cout << '#' << symb1 << hex << counter << '#';
+            } else {
+                for(int i = 0; i < counter; i++) {
+                    cout<<symb1;
+                }
+            }
+
+            counter = 1;
+            symb1 = symb2;
+        }
+    }
+
+    if (symb1 == '#') {
+        cout <<"##" << hex << counter << '#';
+        return 0;
+    }
+
+    if (counter > 4) {
+        cout << '#' << symb1 << hex << counter << '#';
+    } else {
+        for(int i = 0; i < counter; i++) {
+            cout<<symb1;
+        }
+    }
+
+    return 0;
+}
