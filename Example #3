@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+struct Sum {
+    double sum, mean_ar;
+    long counter;
+    Sum() { sum = 0; counter = 0; mean_ar = 0;}
+    void operator()(double n) { sum += n ; counter++; mean_ar = sum / counter;}
+
+};
+
+using namespace std;
+
+int main()
+{
+    vector<double> v;
+    double elem;
+    while (cin >> elem) {
+        v.push_back(elem);
+    }
+
+    int size_v = v.size()/10;
+    v.erase(v.begin(), v.begin() + size_v);
+    v.erase(v.end() - size_v, v.end());
+
+    sort(v.begin(), v.end());
+
+    size_v = v.size() / 10;
+    v.erase(v.begin(), v.begin() + size_v);
+    v.erase(v.end() - size_v, v.end());
+
+    Sum s = for_each(v.begin(), v.end(), Sum());
+
+    cout.precision(10);
+    cout << s.mean_ar << endl;
+    return 0;
+}
