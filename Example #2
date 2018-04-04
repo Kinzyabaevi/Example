@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+template<typename T>
+T min_(T a, T b) {
+    return (a > b)?b:a;
+}
+
+template<typename T>
+T max_(T a, T b) {
+    return (a < b)?b:a;
+}
+
+template<typename T>
+class Coord {
+public:
+    T row = typename T :: value_type(), col = typename T :: value_type();
+    Coord(T s1 = typename T :: value_type(), T s2 = typename T :: value_type()) : row(s1), col(s2) {}
+};
+
+template<typename T>
+auto dist(T m, T b1, T b2) {
+    auto del1 = min_((b2.row - b1.row + m.row) % m.row, (b1.row - b2.row + m.row) % m.row);
+    auto del2 = min_((b2.col - b1.col + m.col) % m.col, (b1.col - b2.col + m.col) % m.col);
+    return max_(del1, del2);
+}
